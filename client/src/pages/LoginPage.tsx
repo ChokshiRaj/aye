@@ -309,17 +309,6 @@ export function LoginPage() {
             </div>
           )}
         </div>
-
-        {/* Demo Credentials Alert */}
-        <div className="mt-4 rounded-xl border border-red-150 bg-red-50/10 p-4 text-center dark:border-red-950/20 dark:bg-red-950/10">
-          <p className="text-xs font-medium text-red-700 dark:text-red-450">
-            💡 Quick Demo Credentials:
-          </p>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            Email: <span className="font-mono font-semibold">demo@aye.com</span> | Password:{' '}
-            <span className="font-mono font-semibold">Password123</span>
-          </p>
-        </div>
       </div>
     </div>
   );
