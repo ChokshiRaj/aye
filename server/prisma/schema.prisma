@@ -1,0 +1,217 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String      @id @default(cuid())
+  email            String      @unique
+  name             String
+  passwordHash     String
+  mobile           String?
+  twoFactorEnabled Boolean     @default(false)
+  twoFactorSecret  String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  todos            Todo[]
+  notes            Note[]
+  habits           Habit[]
+  habitLogs        HabitLog[]
+  bookmarks        Bookmark[]
+  settings         Settings?
+  sessions         Session[]
+  events           Event[]
+  pushSubscriptions PushSubscription[]
+  notifications    Notification[]
+  focusSessions    FocusSession[]
+  googleToken      GoogleToken?
+  loginOtps        LoginOtp[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  userAgent String?
+  ip        String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
+
+model Todo {
+  id        String   @id @default(cuid())
+  text      String
+  done      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  content   String
+  updatedAt DateTime @updatedAt
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Habit {
+  id        String      @id @default(cuid())
+  name      String
+  createdAt DateTime    @default(now())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logs      HabitLog[]
+}
+
+model HabitLog {
+  id        String   @id @default(cuid())
+  date      DateTime @db.Date
+  habitId   String
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([habitId, date])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  icon      String?
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Settings {
+  id          String  @id @default(cuid())
+  city        String  @default("Vadodara")
+  timezone    String  @default("Asia/Kolkata")
+  stockTickers String[] @default(["NIFTY", "RELIANCE", "TCS"])
+  newsApiKey  String?
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Crypto Visibility Toggle
+  showCrypto             Boolean @default(false)
+
+  // Email notification preferences
+  emailLoginOtp          Boolean @default(false)
+  emailPasswordAlert     Boolean @default(true)
+  emailDailyHabits       Boolean @default(true)
+  emailEventReminder     Boolean @default(true)
+  emailWeeklyReport      Boolean @default(true)
+  emailStreakWarning     Boolean @default(true)
+  emailDataExport        Boolean @default(true)
+  emailLoginAlert        Boolean @default(true)
+
+  // SMTP Configuration
+  smtpHost               String?
+  smtpPort               Int?
+  smtpUser               String?
+  smtpPass               String?
+  smtpFrom               String?
+
+  // Google OAuth Config
+  googleClientId         String?
+  googleClientSecret     String?
+  googleRedirectUri      String?
+
+  // Gold API Config
+  goldApiKey             String?
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  date        DateTime @db.Date
+  startTime   String
+  endTime     String
+  category    String   @default("work")
+  description String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  title     String
+  body      String
+  type      NotificationType
+  read      Boolean          @default(false)
+  link      String?
+  createdAt DateTime         @default(now())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum NotificationType {
+  HABIT
+  EVENT
+  TODO
+  SYSTEM
+  FOCUS
+}
+
+model FocusSession {
+  id          String   @id @default(cuid())
+  minutes     Int
+  completedAt DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model MetalPriceHistory {
+  id        String   @id @default(cuid())
+  metal     String   // "gold" | "silver"
+  priceINR  Float
+  unit      String   // "10g" | "kg"
+  date      DateTime @db.Date
+  createdAt DateTime @default(now())
+
+  @@unique([metal, date])
+}
+
+model GoogleToken {
+  id           String   @id @default(cuid())
+  accessToken  String
+  refreshToken String
+  expiresAt    DateTime
+  email        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LoginOtp {
+  id        String   @id @default(cuid())
+  otp       String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+

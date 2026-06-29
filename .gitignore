@@ -1,0 +1,44 @@
+# Root
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Client
+client/dist/
+client/.env
+client/.env.local
+
+# Server
+server/dist/
+server/.env
+server/.env.local
+server/prisma/migrations/*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Prisma / DB local
+server/prisma/*.db
+server/prisma/*.db-journal
