@@ -243,11 +243,8 @@ export function DashboardPage() {
               {/* Bookmarks Widget */}
               <BookmarksWidget />
 
-              {/* Markets Shortcut Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[#1f1f1f] dark:bg-[#111111]">
-                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-550 uppercase tracking-widest mb-3">
-                  Finance & Commodities
-                </h3>
+              {/* Markets & Settings Shortcut Card */}
+              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[#1f1f1f] dark:bg-[#111111] flex flex-col gap-2">
                 <Link
                   to="/markets"
                   className="flex items-center justify-between w-full rounded-lg bg-red-50 p-3 text-xs font-bold text-red-600 hover:bg-red-100 dark:bg-red-950/20 dark:text-red-400"
@@ -257,13 +254,6 @@ export function DashboardPage() {
                   </span>
                   <span>→</span>
                 </Link>
-              </div>
-
-              {/* Settings Shortcut Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[#1f1f1f] dark:bg-[#111111]">
-                <h3 className="text-xs font-bold text-slate-400 dark:text-slate-550 uppercase tracking-widest mb-3">
-                  Account Configuration
-                </h3>
                 <Link
                   to="/settings"
                   className="flex items-center justify-between w-full rounded-lg bg-red-50 p-3 text-xs font-bold text-red-600 hover:bg-red-100 dark:bg-red-950/20 dark:text-red-400"

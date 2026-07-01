@@ -328,11 +328,11 @@ export function CalendarPage() {
 
       {/* ── Add / Edit Event Modal ──────────────────────────────────────────── */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm px-0 sm:px-4">
-          <div className="w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-[#1f1f1f] dark:bg-[#111111] animate-in slide-in-from-bottom sm:zoom-in-95 duration-200 overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm px-0 sm:px-4">
+          <div className="w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-[#1f1f1f] dark:bg-[#111111] animate-in slide-in-from-bottom sm:zoom-in-95 duration-200 overflow-hidden max-h-[90vh] flex flex-col">
 
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-[#1f1f1f]">
+            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-[#1f1f1f] shrink-0">
               <div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                   {editingEvent ? 'Edit Event' : 'New Event'}
@@ -350,7 +350,7 @@ export function CalendarPage() {
             </div>
 
             {/* Modal Form */}
-            <form onSubmit={handleFormSubmit} className="p-5 space-y-4">
+            <form onSubmit={handleFormSubmit} className="p-5 space-y-4 overflow-y-auto custom-scrollbar flex-1 pb-safe">
 
               {/* Category selector — visual pills */}
               <div>

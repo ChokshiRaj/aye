@@ -114,7 +114,7 @@ export function FinanceWidget({ tickers }: FinanceWidgetProps) {
 
                 {/* Sparkline Chart */}
                 <div className="h-8 w-1/3 px-1">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                     <AreaChart data={ticker.history}>
                       <defs>
                         <linearGradient id={`grad-${ticker.symbol}`} x1="0" y1="0" x2="0" y2="1">

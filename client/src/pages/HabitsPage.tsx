@@ -311,7 +311,7 @@ export function HabitsPage() {
                   onClick={() => setShowHeatmap(false)}
                   className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition-all ${
                     !showHeatmap
-                      ? 'bg-red-600 text-white shadow-sm'
+                      ? 'bg-gradient-to-r from-red-500 to-red-650 text-white shadow-sm shadow-red-500/10'
                       : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white'
                   }`}
                 >
@@ -321,7 +321,7 @@ export function HabitsPage() {
                   onClick={() => setShowHeatmap(true)}
                   className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition-all ${
                     showHeatmap
-                      ? 'bg-red-600 text-white shadow-sm'
+                      ? 'bg-gradient-to-r from-red-500 to-red-650 text-white shadow-sm shadow-red-500/10'
                       : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white'
                   }`}
                 >
@@ -357,8 +357,10 @@ export function HabitsPage() {
                               }`}
                             >
                               <div>{d.dayLabel}</div>
-                              <div className={`mt-0.5 mx-auto flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${
-                                d.isToday ? 'bg-red-500/10 text-red-500' : ''
+                              <div className={`mt-0.5 mx-auto flex h-5.5 w-5.5 items-center justify-center rounded-md text-[10px] font-bold transition-all ${
+                                d.isToday
+                                  ? 'bg-red-650 text-white font-extrabold shadow-sm shadow-red-500/20'
+                                  : 'bg-slate-50 dark:bg-slate-800/40 text-slate-500 dark:text-slate-400'
                               }`}>
                                 {d.dayNum}
                               </div>
@@ -417,13 +419,15 @@ export function HabitsPage() {
                                   <td key={d.dateStr} className="py-4 text-center">
                                     <button
                                       onClick={() => handleToggleLog(habit.id, d.dateStr)}
-                                      className={`mx-auto flex h-6 w-6 items-center justify-center rounded-full border transition-all active:scale-90 ${
+                                      className={`mx-auto flex h-6.5 w-6.5 items-center justify-center rounded-md border transition-all active:scale-90 duration-150 ${
                                         isChecked
-                                          ? 'border-red-600 bg-red-600 text-white shadow-sm shadow-red-500/30'
-                                          : 'border-slate-200 bg-slate-50 text-transparent dark:border-[#1f1f1f] dark:bg-slate-800/10'
-                                      } ${d.isToday ? 'ring-1 ring-red-500/30' : ''}`}
+                                          ? 'border-red-600 bg-gradient-to-br from-red-500 to-red-650 text-white shadow-sm shadow-red-500/30'
+                                          : d.isToday
+                                          ? 'border-red-550 bg-red-50/5 text-transparent hover:border-red-500 dark:border-red-900/50'
+                                          : 'border-slate-200 bg-slate-50 text-transparent hover:border-slate-350 dark:border-slate-800 dark:bg-slate-800/10 dark:hover:border-slate-600'
+                                      } ${d.isToday ? 'ring-2 ring-red-500/20' : ''}`}
                                     >
-                                      <Check className="h-3 w-3 stroke-[3]" />
+                                      <Check className="h-3.5 w-3.5 stroke-[3.5]" />
                                     </button>
                                   </td>
                                 );
@@ -433,7 +437,7 @@ export function HabitsPage() {
                               <td className="py-4 text-right">
                                 <button
                                   onClick={() => handleDeleteHabit(habit.id)}
-                                  className="rounded p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-500 dark:text-slate-500 dark:hover:bg-red-950/20 dark:hover:text-red-450 opacity-0 group-hover:opacity-100 transition-opacity"
+                                  className="rounded p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-500 dark:text-slate-500 dark:hover:bg-red-950/20 dark:hover:text-red-450 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-155"
                                   title="Delete Habit"
                                 >
                                   <Trash2 className="h-3.5 w-3.5" />
@@ -461,7 +465,7 @@ export function HabitsPage() {
                   <button
                     type="submit"
                     disabled={createLoading || !newHabitName.trim()}
-                    className="flex items-center gap-1 rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white hover:bg-red-700 transition-all active:scale-95 disabled:opacity-50"
+                    className="flex items-center gap-1 rounded-lg bg-gradient-to-r from-red-500 to-red-650 px-4 py-2 text-xs font-bold text-white hover:from-red-600 hover:to-red-750 transition-all active:scale-95 disabled:opacity-50 shadow-sm shadow-red-500/20"
                   >
                     <Plus className="h-3.5 w-3.5" /> Add
                   </button>

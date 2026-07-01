@@ -197,7 +197,7 @@ export function MarketsPage() {
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
           
           {/* Tabs Container */}
-          <div className="flex border-b border-slate-200 dark:border-[#1f1f1f] mb-6">
+          <div className="flex border-b border-slate-200 dark:border-[#1f1f1f] mb-6 overflow-x-auto scrollbar-none whitespace-nowrap">
             {(['indices', 'metals', 'forex', 'crypto'] as const).map((tab) => {
               const label = tab.charAt(0).toUpperCase() + tab.slice(1);
               const isActive = activeTab === tab;
@@ -205,7 +205,7 @@ export function MarketsPage() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`border-b-2 px-6 py-3 text-sm font-bold transition-all ${
+                  className={`border-b-2 flex-1 sm:flex-none text-center px-4 sm:px-6 py-3 text-sm font-bold transition-all ${
                     isActive
                       ? 'border-red-600 text-red-600 dark:border-red-500 dark:text-red-400'
                       : 'border-transparent text-slate-450 hover:text-slate-850 dark:text-slate-500 dark:hover:text-slate-200'
@@ -273,7 +273,7 @@ export function MarketsPage() {
                           {/* Sparkline Chart */}
                           {ind.sparkline && ind.sparkline.length > 0 && (
                             <div className="mt-4 h-12 w-full">
-                              <ResponsiveContainer width="100%" height="100%">
+                              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                                 <LineChart data={ind.sparkline.map((price: number, idx: number) => ({ idx, price }))}>
                                   <Line
                                     type="monotone"
@@ -364,7 +364,7 @@ export function MarketsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Gold Card */}
                     <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[#1f1f1f] dark:bg-[#111111]">
-                      <div className="flex justify-between items-start">
+                      <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
                         <div>
                           <div className="flex items-center gap-1 text-amber-500">
                             <span className="text-lg">⭐</span>
@@ -377,7 +377,7 @@ export function MarketsPage() {
                         </div>
 
                         {/* Carat Selector */}
-                        <div className="flex rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800">
+                        <div className="flex rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800 self-start sm:self-auto">
                           <button
                             onClick={() => setGold24kSelect(true)}
                             className={`rounded-md px-2.5 py-1 text-[10px] font-bold ${
@@ -404,7 +404,7 @@ export function MarketsPage() {
                       {/* Gold 7-Day Area Chart */}
                       <div className="mt-6 h-56 w-full">
                         {metals.history?.gold && metals.history.gold.length > 0 ? (
-                          <ResponsiveContainer width="100%" height="100%">
+                          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <AreaChart data={metals.history.gold}>
                               <defs>
                                 <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
@@ -459,7 +459,7 @@ export function MarketsPage() {
                       {/* Silver 7-Day Area Chart */}
                       <div className="mt-6 h-56 w-full">
                         {metals.history?.silver && metals.history.silver.length > 0 ? (
-                          <ResponsiveContainer width="100%" height="100%">
+                          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <AreaChart data={metals.history.silver}>
                               <defs>
                                 <linearGradient id="silverGradient" x1="0" y1="0" x2="0" y2="1">
@@ -619,23 +619,23 @@ export function MarketsPage() {
                         return (
                           <div
                             key={coin.id}
-                            className="flex flex-col sm:flex-row justify-between sm:items-center rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[#1f1f1f] dark:bg-[#111111]"
+                            className="flex justify-between items-center rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm dark:border-[#1f1f1f] dark:bg-[#111111] gap-2 hover:border-slate-350 dark:hover:border-slate-700 transition-all"
                           >
-                            <div className="flex items-center gap-3">
-                              {coin.image && <img src={coin.image} alt={coin.name} className="h-8 w-8 rounded-full" />}
-                              <div>
-                                <h4 className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                            <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                              {coin.image && <img src={coin.image} alt={coin.name} className="h-7 w-7 sm:h-8 sm:w-8 rounded-full shrink-0" />}
+                              <div className="min-w-0 flex-1">
+                                <h4 className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 truncate">
                                   {coin.name}
-                                  <span className="text-[10px] text-slate-400 uppercase">{coin.symbol}</span>
+                                  <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase shrink-0">{coin.symbol}</span>
                                 </h4>
-                                <p className="text-[10px] text-slate-450 mt-0.5">Ranked Coin Data</p>
+                                <p className="text-[9px] sm:text-[10px] text-slate-450 mt-0.5 truncate">Ranked Coin Data</p>
                               </div>
                             </div>
 
                             {/* Sparkline Chart */}
                             {coin.sparkline && coin.sparkline.length > 0 && (
-                              <div className="h-10 w-28 my-3 sm:my-0">
-                                <ResponsiveContainer width="100%" height="100%">
+                              <div className="h-8 w-16 sm:w-28 shrink-0">
+                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                                   <LineChart data={coin.sparkline.map((price: number, idx: number) => ({ idx, price }))}>
                                     <Line
                                       type="monotone"
@@ -649,13 +649,13 @@ export function MarketsPage() {
                               </div>
                             )}
 
-                            <div className="flex gap-8 justify-between sm:justify-start items-center">
-                              <div className="text-right">
+                            <div className="flex gap-4 sm:gap-8 items-center justify-end shrink-0 text-right">
+                              <div>
                                 <p className="text-xs font-black text-slate-900 dark:text-white">
                                   ₹{formatCurrency(coin.price, { decimals: coin.price < 100 ? 4 : 2 })}
                                 </p>
                                 <span
-                                  className={`inline-flex items-center gap-0.5 text-[10px] font-bold mt-0.5 ${
+                                  className={`inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold mt-0.5 ${
                                     isPositive ? 'text-emerald-600' : 'text-red-655'
                                   }`}
                                 >

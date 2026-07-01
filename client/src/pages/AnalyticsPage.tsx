@@ -279,7 +279,7 @@ export function AnalyticsPage() {
                 </div>
               ) : (
                 <div className="h-60 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                     <AreaChart data={stats.focus.history}>
                       <defs>
                         <linearGradient id="colorFocus" x1="0" y1="0" x2="0" y2="1">
@@ -344,7 +344,7 @@ export function AnalyticsPage() {
               ) : (
                 <div className="h-60 w-full flex flex-col justify-around">
                   <div className="h-44 w-full">
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                       <PieChart>
                         <Pie
                           data={todoPieData}
