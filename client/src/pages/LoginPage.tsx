@@ -116,7 +116,7 @@ export function LoginPage() {
             AYE
           </h1>
           <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 font-medium">
-            Your personal command centre dashboard
+            An personal command centre dashboard
           </p>
         </div>
 
