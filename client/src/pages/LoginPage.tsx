@@ -53,7 +53,7 @@ export function LoginPage() {
         setShow2FA(true);
       }
     } catch (err: any) {
-      setServerError(err.message || 'Incorrect email or password.');
+      setServerError(err.response?.data?.error || err.message || 'Incorrect email or password.');
     }
   };
 
@@ -71,7 +71,7 @@ export function LoginPage() {
         setShow2FA(true);
       }
     } catch (err: any) {
-      setServerError(err.message || 'Invalid OTP code.');
+      setServerError(err.response?.data?.error || err.message || 'Invalid OTP code.');
     } finally {
       setSubmittingOtp(false);
     }
@@ -86,7 +86,7 @@ export function LoginPage() {
     try {
       await loginVerify2fa(temp2faToken, code2fa);
     } catch (err: any) {
-      setServerError(err.message || 'Invalid 2FA code.');
+      setServerError(err.response?.data?.error || err.message || 'Invalid 2FA code.');
     } finally {
       setSubmitting2fa(false);
     }
