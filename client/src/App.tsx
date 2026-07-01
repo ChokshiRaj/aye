@@ -49,10 +49,10 @@ export function App() {
 
   if (initializing) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white font-medium text-sm">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 text-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 dark:text-white font-medium text-sm">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-slate-400 font-semibold tracking-wider text-xs uppercase">Initializing AYE Dashboard...</span>
+          <div className="w-8 h-8 border-2 border-red-650 dark:border-red-500 border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-slate-500 dark:text-slate-400 font-semibold tracking-wider text-xs uppercase">Initializing AYE...</span>
         </div>
       </div>
     );
