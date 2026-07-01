@@ -1,4 +1,7 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import axios from 'axios';
+import { useAuthStore } from './store/authStore';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import { SettingsPage } from './pages/SettingsPage';
@@ -10,6 +13,50 @@ import MarketsPage from './pages/MarketsPage';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
 export function App() {
+  const [initializing, setInitializing] = useState(true);
+  const { setAuth, clearAuth } = useAuthStore();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const refreshBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        
+        // Silently request fresh access token using HttpOnly cookie
+        const refreshRes = await axios.post(
+          `${refreshBaseUrl}/api/auth/refresh`,
+          {},
+          { withCredentials: true }
+        );
+        const { accessToken } = refreshRes.data.data;
+
+        // Fetch authenticated user profile details
+        const meRes = await axios.get(
+          `${refreshBaseUrl}/api/auth/me`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        const { user } = meRes.data.data;
+
+        setAuth(user, accessToken);
+      } catch (err) {
+        clearAuth();
+      } finally {
+        setInitializing(false);
+      }
+    };
+    checkSession();
+  }, [setAuth, clearAuth]);
+
+  if (initializing) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white font-medium text-sm">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-slate-400 font-semibold tracking-wider text-xs uppercase">Initializing AYE Dashboard...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>

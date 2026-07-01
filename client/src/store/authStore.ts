@@ -21,15 +21,13 @@ export const useAuthStore = create<AuthState>((set) => {
 
   return {
     user: getPersistedUser(),
-    accessToken: localStorage.getItem('aye_token') || null,
+    accessToken: null,
     setAuth: (user, token) => {
       localStorage.setItem('aye_user', JSON.stringify(user));
-      localStorage.setItem('aye_token', token);
       set({ user, accessToken: token });
     },
     clearAuth: () => {
       localStorage.removeItem('aye_user');
-      localStorage.removeItem('aye_token');
       set({ user: null, accessToken: null });
     },
   };
