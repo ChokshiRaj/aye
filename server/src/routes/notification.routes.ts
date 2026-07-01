@@ -4,9 +4,6 @@ import { authenticate } from '../middleware/authenticate';
 
 const router = Router();
 
-// Public webhook route for local device triggers (e.g. laptop logon script)
-router.post('/device-alert', notificationController.createDeviceAlert);
-
 // All notifications endpoints require authentication
 router.use(authenticate);
 
