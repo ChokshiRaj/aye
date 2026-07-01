@@ -1,0 +1,30 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  audit:
+    name: Dependency Vulnerability Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Audit Client Dependencies
+        run: |
+          cd client
+          npm audit --audit-level=high
+
+      - name: Audit Server Dependencies
+        run: |
+          cd server
+          npm audit --audit-level=high

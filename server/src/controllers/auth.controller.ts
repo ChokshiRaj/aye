@@ -354,6 +354,42 @@ export async function refresh(req: Request, res: Response) {
     });
 
     if (!session || session.expiresAt < new Date()) {
+      // SECURITY ANOMALY: A cryptographically valid refresh token was presented
+      // but it does not exist in our active sessions database (meaning it was either
+      // explicitly revoked/logged out, or already rotated out/reused).
+      const ip = (req.headers['x-forwarded-for'] as string) || req.ip || 'Unknown IP';
+      const userAgent = req.headers['user-agent'] || 'Unknown Browser';
+      console.warn(`[SECURITY ALERT] Revoked or rotated refresh token presented for user ${payload.userId} from IP ${ip}.`);
+
+      try {
+        const user = await prisma.user.findUnique({ where: { id: payload.userId } });
+        if (user) {
+          const subject = '[AYE Dashboard] Security Alert: Revoked Session Token Attempt';
+          const html = wrapInTemplate(
+            'Security Warning: Token Reuse or Revocation',
+            `<p>Hello ${user.name},</p>
+             <p style="color: #dc2626; font-weight: bold;">An expired, revoked, or previously rotated session token was presented to AYE Dashboard.</p>
+             <p>This occurs when a device tries to authenticate using a token that has been cleared from the database. If you did not recently log out of a browser or device, this may indicate a token theft attempt.</p>
+             <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px;">
+               <tr>
+                 <td style="padding: 6px 0; font-weight: bold; color: #64748b; width: 100px;">IP Address:</td>
+                 <td style="padding: 6px 0; color: #1e293b;">${ip}</td>
+               </tr>
+               <tr>
+                 <td style="padding: 6px 0; font-weight: bold; color: #64748b;">Device Info:</td>
+                 <td style="padding: 6px 0; color: #1e293b;">${userAgent}</td>
+               </tr>
+             </table>
+             <p>As a precaution, you can manage active devices in your settings, or change your password to immediately clear all active credentials.</p>`
+          );
+          await sendMail({ to: user.email, subject, html }).catch((err) =>
+            console.error('Failed to send token reuse security email:', err)
+          );
+        }
+      } catch (err) {
+        console.error('Error logging token reuse alert:', err);
+      }
+
       if (session) {
         await prisma.session.delete({ where: { id: session.id } });
       }
