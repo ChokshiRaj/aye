@@ -1,21 +1,18 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Github, Cpu, Sparkles, BookOpen, Heart, Shield, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Github, Cpu, BookOpen, Heart, Shield, CheckCircle2 } from 'lucide-react';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 px-4 py-8 md:px-8 text-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 dark:text-slate-100 flex flex-col justify-between">
       {/* Container */}
-      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col justify-center py-10">
+      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col justify-start pt-12 md:pt-16 pb-10">
         
         {/* Header Controls */}
-        <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+        <div className="flex items-center justify-between mb-10 animate-in fade-in slide-in-from-top-4 duration-500">
           <Link to="/login" className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors group">
             <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
             Back to Sign In
           </Link>
-          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-650 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400 uppercase tracking-widest flex items-center gap-1.5">
-            <Sparkles className="h-3 w-3 animate-pulse" /> Project Info
-          </span>
         </div>
 
         {/* Hero Banner */}
@@ -33,7 +30,7 @@ export default function AboutPage() {
           
           {/* Left Column: Why & Engineering Stack */}
           <div className="space-y-6">
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-xl backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2 mb-3">
                 <Heart className="h-4 w-4 text-red-500" />
                 Why I Built AYE
@@ -43,7 +40,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-xl backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2 mb-4">
                 <Cpu className="h-4 w-4 text-red-500" />
                 Engineering Stack
@@ -79,7 +76,7 @@ export default function AboutPage() {
 
           {/* Right Column: Key Features & Security Design */}
           <div className="space-y-6">
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-xl backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2 mb-4">
                 <BookOpen className="h-4 w-4 text-red-500" />
                 Key Highlights
@@ -104,7 +101,7 @@ export default function AboutPage() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-xl backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 backdrop-blur-md dark:border-[#1f1f1f] dark:bg-[#111111]/60">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2 mb-3">
                 <Shield className="h-4 w-4 text-red-500" />
                 Built-in Privacy
