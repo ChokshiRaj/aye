@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Lock, Mail, Eye, EyeOff, ShieldAlert, ArrowRight, ShieldCheck, ChevronLeft } from 'lucide-react';
 
@@ -306,6 +307,15 @@ export function LoginPage() {
                   )}
                 </button>
               </form>
+
+              <div className="mt-6 border-t border-slate-100 pt-4 text-center dark:border-slate-800/60">
+                <Link
+                  to="/about"
+                  className="text-xs font-semibold text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 transition-colors"
+                >
+                  About AYE Command Centre
+                </Link>
+              </div>
             </div>
           )}
         </div>

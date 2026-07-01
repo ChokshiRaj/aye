@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuthStore } from './store/authStore';
 import LoginPage from './pages/LoginPage';
+import AboutPage from './pages/AboutPage';
 import DashboardPage from './pages/DashboardPage';
 import { SettingsPage } from './pages/SettingsPage';
 import CalendarPage from './pages/CalendarPage';
@@ -62,6 +63,7 @@ export function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/about" element={<AboutPage />} />
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
