@@ -27,7 +27,11 @@ function setCachedData<T>(key: string, data: T): void {
 // -----------------------------------------------------------------------------
 async function fetchYahooFinance(symbol: string): Promise<any> {
   const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=5m&range=1d`;
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    },
+  });
   if (!res.ok) {
     throw new Error(`Failed to fetch Yahoo Finance for ${symbol}`);
   }
@@ -156,7 +160,11 @@ export async function getMovers(_req: Request, res: Response) {
       MOVERS_WATCHLIST.map(async (ticker) => {
         try {
           const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`;
-          const fetchRes = await fetch(url);
+          const fetchRes = await fetch(url, {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            },
+          });
           if (!fetchRes.ok) throw new Error();
           const json = await fetchRes.json() as any;
           const meta = json.chart?.result?.[0]?.meta || {};
