@@ -30,7 +30,29 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Security Middlewares
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"], // Allow self and inline scripts for SPA builds
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // Allow styles and Google Fonts
+        fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"], // Allow fonts and data: fonts
+        imgSrc: ["'self'", "data:", "https:", "http:"], // Allow images from self, data URIs, and external icons (bookmarks/weather)
+        connectSrc: [
+          "'self'",
+          "https://geocoding-api.open-meteo.com",
+          "https://api.open-meteo.com",
+          "https://fonts.googleapis.com",
+          "https://fonts.gstatic.com",
+          process.env.CLIENT_URL || 'http://localhost:5173',
+        ],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+  })
+);
 app.use(
   cors({
     origin: process.env.CLIENT_URL || 'http://localhost:5173',

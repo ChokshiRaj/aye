@@ -9,14 +9,14 @@ import {
   verify2faSchema,
   login2faSchema,
 } from '../schemas/auth.schema';
-import { authRateLimiter } from '../middleware/rateLimiter';
+import { authRateLimiter, refreshRateLimiter } from '../middleware/rateLimiter';
 
 const router = Router();
 
 // Auth Endpoints
 router.post('/login', authRateLimiter, validate({ body: loginSchema }), authController.login);
 router.post('/verify-otp', authRateLimiter, authController.verifyOtp);
-router.post('/refresh', authController.refresh);
+router.post('/refresh', refreshRateLimiter, authController.refresh);
 router.post('/logout', authenticate, authController.logout);
 router.get('/me', authenticate, authController.me);
 
