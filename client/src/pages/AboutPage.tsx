@@ -3,12 +3,12 @@ import { ArrowLeft, Github, Cpu, BookOpen, Heart, Shield, CheckCircle2 } from 'l
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 px-4 py-8 md:px-8 text-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 dark:text-slate-100 flex flex-col justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 px-4 pb-8 pt-0 md:px-8 text-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 dark:text-slate-100 flex flex-col justify-between">
       {/* Container */}
-      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col justify-start pt-12 md:pt-16 pb-10">
+      <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col justify-start pt-6 md:pt-8 pb-6">
         
         {/* Header Controls */}
-        <div className="flex items-center justify-between mb-10 animate-in fade-in slide-in-from-top-4 duration-500">
+        <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
           <Link to="/login" className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors group">
             <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
             Back to Sign In
@@ -16,7 +16,7 @@ export default function AboutPage() {
         </div>
 
         {/* Hero Banner */}
-        <div className="text-center md:text-left mb-12 animate-in fade-in slide-in-from-top-6 duration-700 delay-100">
+        <div className="text-center md:text-left mb-10 animate-in fade-in slide-in-from-top-6 duration-700 delay-100">
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-4">
             AYE Command Centre
           </h1>
@@ -26,7 +26,7 @@ export default function AboutPage() {
         </div>
 
         {/* Details Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+        <div className="grid md:grid-cols-2 gap-8 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
           
           {/* Left Column: Why & Engineering Stack */}
           <div className="space-y-6">
