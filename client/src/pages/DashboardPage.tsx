@@ -4,7 +4,7 @@ import { widgetsApi } from '../api/widgets';
 import { authApi } from '../api/auth';
 import { Settings as SettingsType } from '../types';
 import Sidebar from '../components/layout/Sidebar';
-import { BottomNav, MobileHeader } from '../components/layout/BottomNav';
+import { BottomNav } from '../components/layout/BottomNav';
 
 // Widgets
 import ClockWidget from '../components/widgets/ClockWidget';
@@ -123,8 +123,7 @@ export function DashboardPage() {
         setExpanded={setSidebarExpanded}
       />
 
-      {/* Centered Top Wordmark Header (Mobile) */}
-      <MobileHeader />
+
 
       {/* Main Content Area */}
       <div

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/layout/Sidebar';
-import { BottomNav, MobileHeader } from '../components/layout/BottomNav';
+import { BottomNav } from '../components/layout/BottomNav';
 import api from '../api/axios';
 import {
   AreaChart,
@@ -132,8 +132,7 @@ export function AnalyticsPage() {
       {/* Sidebar navigation */}
       <Sidebar expanded={sidebarExpanded} setExpanded={setSidebarExpanded} />
 
-      {/* Mobile Wordmark Header */}
-      <MobileHeader />
+
 
       {/* Main Content Area */}
       <div

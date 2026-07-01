@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
-import { BottomNav, MobileHeader } from '../components/layout/BottomNav';
+import { BottomNav } from '../components/layout/BottomNav';
 import api from '../api/axios';
 import {
   Bell,
@@ -184,8 +184,7 @@ export function NotificationsPage() {
       {/* Sidebar navigation */}
       <Sidebar expanded={sidebarExpanded} setExpanded={setSidebarExpanded} />
 
-      {/* Mobile Wordmark Header */}
-      <MobileHeader />
+
 
       {/* Main Content Area */}
       <div

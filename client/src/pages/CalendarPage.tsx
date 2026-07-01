@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { widgetsApi } from '../api/widgets';
 import Sidebar from '../components/layout/Sidebar';
-import { BottomNav, MobileHeader } from '../components/layout/BottomNav';
+import { BottomNav } from '../components/layout/BottomNav';
 import CalendarWidget from '../components/widgets/CalendarWidget';
 import {
   Plus,
@@ -282,8 +282,7 @@ export function CalendarPage() {
       {/* Desktop Sidebar */}
       <Sidebar expanded={sidebarExpanded} setExpanded={setSidebarExpanded} />
 
-      {/* Mobile Header */}
-      <MobileHeader />
+
 
       {/* Main Content Area */}
       <div className={`transition-all duration-300 min-h-screen pb-20 md:pb-0 ${sidebarExpanded ? 'md:pl-[220px]' : 'md:pl-[60px]'}`}>
