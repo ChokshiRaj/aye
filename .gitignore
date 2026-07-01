@@ -42,3 +42,4 @@ Thumbs.db
 # Prisma / DB local
 server/prisma/*.db
 server/prisma/*.db-journal
+AYE_DOCUMENTATION.md
